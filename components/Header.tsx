@@ -37,6 +37,19 @@ const Container = styled.div`
             }
         }
     }
+    .header-login-button{
+        height:42px;
+        padding:0 16px;
+        border:0;
+        box-shadow:0px 1px 2px rgba(0,0,0,0.18);
+        border-radius 21px;
+        background-color:white;
+        cursor:pointer;
+        outline:none;
+        &:hover{
+            box-shadow:0px 2px 8px rgba(0,0,0,0.12);
+        }
+    }
 `
 
 const Header:React.FC = () => {
