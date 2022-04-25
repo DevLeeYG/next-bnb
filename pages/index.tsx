@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components"
 import Header from '../components/Header';
 import palette from '../styles/palette';
-
+//
 const Container = styled.div`
     font-size : 21px;
     color:gray;
@@ -21,7 +21,7 @@ background-color:${palette.black}
 const index = () => {
     return (
         <Container>
-         <Header/>
+       
         </Container>
     );
 };

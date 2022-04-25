@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
 import palette from '../styles/palette';
+import Link from "next/link"
 import AirbnbLogoIcon from "../public/static/svg/logo/logo.svg"
 import AirbnbTextIcon from "../public/static/svg/logo/logo_text.svg"
+import MordalPortal from './MordalPortal';
+import SignUpModal from './auth/SignUpModal';
 const Container = styled.div`
     position:sticky;
     top:0;
@@ -50,20 +53,49 @@ const Container = styled.div`
             box-shadow:0px 2px 8px rgba(0,0,0,0.12);
         }
     }
+    .modal-wrapper{
+        width:100%;
+        height:100%;
+        display:flex;
+        justify-content : center;
+        align-items:center;
+        position: fixed;
+        top:0;
+        left:0;
+        .modal-background{
+            position:absolute;
+            width:100%;
+            height:100%;
+            background-color:rgba(0,0,0,0.75);
+            z-index:10;
+        }
+        .modal-contents{
+            width:400px;
+            height:400px;
+            background-color:white;
+            z-index:11;
+        }
+
+     }
 `
 
 const Header:React.FC = () => {
+
+    const [modalOpened,setModalOpened] = useState<boolean>(false)
+
     return (
         <Container>
-            <div className="header-logo-wrapper">
+            <Link  href="/">
+            <a className="header-logo-wrapper">
                 <AirbnbLogoIcon className="header-logo"/>
                 <AirbnbTextIcon/>
-            </div>
+            </a>
+            </Link>
             <div className='header-auth-button'>
                 <button
                 type="button"
                 className='header-sign-up-button'
-                onClick={()=>{}}
+                onClick={()=>setModalOpened(true)}
                 >
                     회원가입
                 </button>
@@ -73,7 +105,13 @@ const Header:React.FC = () => {
                 >
                     로그인
                 </button>
+                {modalOpened && (
+                <MordalPortal >
+                    <SignUpModal/>
+                </MordalPortal>
+                )}
             </div>
+      
         </Container>
     );
 };
