@@ -1,29 +1,14 @@
+/* eslint-disable react/jsx-filename-extension */
+// eslint-disable-next-line no-use-before-define
 import React from 'react';
-import styled from "styled-components"
-import Header from '../components/Header';
-import palette from '../styles/palette';
+import styled from 'styled-components';
 
 const Container = styled.div`
-    font-size : 21px;
-    color:gray;
-    width:100%;
-    background:'black';
-  
-  
+  font-size: 21px;
+  color: gray;
+`;
+//
 
-`
-const Aa = styled.div`
-background-color:${palette.black}
-    width:100%;
-    height:300px;
-`
+const index: React.FC = () => <Container>hello nextfds </Container>;
 
-const index = () => {
-    return (
-        <Container>
-         <Header/>
-        </Container>
-    );
-};
-
-export default index
+export default index;
