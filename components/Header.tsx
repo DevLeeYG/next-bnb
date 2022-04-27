@@ -1,12 +1,18 @@
+/* eslint-disable no-use-before-define */
+import Link from 'next/link';
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
+import useModal from '../hooks/useModal';
+import AirbnbLogoIcon from '../public/static/svg/logo/logo.svg';
+import AirbnbTextIcon from '../public/static/svg/logo/logo_text.svg';
 import palette from '../styles/palette';
-import AirbnbLogoIcon from "../public/static/svg/logo/logo.svg"
-import AirbnbTextIcon from "../public/static/svg/logo/logo_text.svg"
+import SignUpModal from './auth/SignUpModal';
+
 const Container = styled.div`
     position:sticky;
     top:0;
     width:100%;
+
     height:80px;
     display:flex;
     justify-content:space-between;
@@ -50,32 +56,60 @@ const Container = styled.div`
             box-shadow:0px 2px 8px rgba(0,0,0,0.12);
         }
     }
-`
+    .modal-wrapper{
+        width:100%;
+        height:100%;
+        display:flex;
+        justify-content : center;
+        align-items:center;
+        position: fixed;
+        top:0;
+        left:0;
+        .modal-background{
+            position:absolute;
+            width:100%;
+            height:100%;
+            background-color:rgba(0,0,0,0.75);
+            z-index:10;
+        }
+        .modal-contents{
+            width:400px;
+            height:400px;
+            background-color:white;
+            z-index:11;
+        }
 
-const Header:React.FC = () => {
-    return (
-        <Container>
-            <div className="header-logo-wrapper">
-                <AirbnbLogoIcon className="header-logo"/>
-                <AirbnbTextIcon/>
-            </div>
-            <div className='header-auth-button'>
-                <button
-                type="button"
-                className='header-sign-up-button'
-                onClick={()=>{}}
-                >
-                    회원가입
-                </button>
-                <button
-                type="button"
-                className="header-login-button"
-                >
-                    로그인
-                </button>
-            </div>
-        </Container>
-    );
+     }
+`;
+
+const Header: React.FC = () => {
+  const { openModal, ModalPortal } = useModal();
+
+  return (
+    <Container>
+      <Link href="/">
+        <a href="#!" className="header-logo-wrapper">
+          <AirbnbLogoIcon className="header-logo" />
+          <AirbnbTextIcon />
+        </a>
+      </Link>
+      <div className="header-auth-button">
+        <button
+          type="button"
+          className="header-sign-up-button"
+          onClick={openModal}
+        >
+          회원가입
+        </button>
+        <button type="button" className="header-login-button">
+          로그인
+        </button>
+      </div>
+      <ModalPortal>
+        <SignUpModal />
+      </ModalPortal>
+    </Container>
+  );
 };
 
 export default Header;
