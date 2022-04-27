@@ -13,3 +13,7 @@ export const monthList = [
   '11월',
   '12월',
 ];
+
+export const dayList = Array.from(Array(31), (aa, i) => `${String(i + 1)}일`);
+
+export const yearList = Array.from(Array(121), (_, i) => `${2020 - i}년`);
