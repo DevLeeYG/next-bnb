@@ -1,12 +1,15 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { monthList } from '../../lib/staticData';
 import ClosedEyeIcon from '../../public/static/svg/auth/closed_eye.svg';
 import MailIcon from '../../public/static/svg/auth/mail.svg';
 import OpenedEyeIcon from '../../public/static/svg/auth/opened_eye.svg';
 import PersonIcon from '../../public/static/svg/auth/person.svg';
 import CloseXIcon from '../../public/static/svg/modal/modal_colose_x_icon.svg';
+import palette from '../../styles/palette';
 import Input from '../common/Input';
+import Selector from '../common/Selector';
 
 const Container = styled.form`
   width: 568px;
@@ -32,6 +35,16 @@ const Container = styled.form`
     svg {
       cursor: pointer;
     }
+  }
+  .sign-up-birthday-label {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+  .sign-up-modal-birthday-info {
+    margin-bottom: 16px;
+    color: ${palette.charcoal};
   }
 `;
 
@@ -111,6 +124,12 @@ const SignUpModal: React.FC = () => {
           onChange={onChangePassword}
         />
       </div>
+      <p className="sign-up-birthday-label">생일</p>
+      <p className="sign-up-modal-birthday-info">
+        만 18세 이상의 성인만 회원으로 가입할 수 있습니다. 생일은 다른
+        에어비앤비 이용자에게 공개되지 않습니다.
+      </p>
+      <Selector options={monthList} />
     </Container>
   );
 };
