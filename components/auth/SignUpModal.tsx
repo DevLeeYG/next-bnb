@@ -39,11 +39,15 @@ const Container = styled.form`
   }
   .sign-up-birthday-label {
     font-size: 16px;
-    font-weight: 600;
+
     margin-top: 16px;
     margin-bottom: 8px;
   }
   .sign-up-modal-birthday-info {
+    padding: 5px;
+    font-style: bold;
+    font-weight: 600;
+    font-size: 14px;
     margin-bottom: 16px;
     color: ${palette.charcoal};
   }
@@ -80,8 +84,6 @@ const SignUpModal: React.FC = () => {
   const [birthYear, setBirthYear] = useState<string | undefined>();
   const [birthDay, setBirthDay] = useState<string | undefined>();
   const [birthMonth, setBirthMonth] = useState<string | undefined>();
-
-  console.log(birthDay, birthMonth, birthYear);
 
   //* 비밀번호 숨김
   const toggleHidePassword = () => {
