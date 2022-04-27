@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/require-default-props */
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/jsx-props-no-spreading */
