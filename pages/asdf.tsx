@@ -4,6 +4,7 @@ import React from 'react';
 const Asdf = () => (
   <div>
     <span>1</span>
+    <span>2</span>
   </div>
 );
 
