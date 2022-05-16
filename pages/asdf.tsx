@@ -4,6 +4,9 @@ const Asdf = () => (
   <div>
     asdfasdf
     <span>asdfasdf</span>
+    <span>asdfasdf</span>
+    <span>asdfasdf</span>
+    <span>asdfasdf</span>
   </div>
 );
 
