@@ -81,8 +81,6 @@ const SignUpModal: React.FC = () => {
   const [birthDay, setBirthDay] = useState<string | undefined>();
   const [birthMonth, setBirthMonth] = useState<string | undefined>();
 
-  console.log(birthDay, birthMonth, birthYear);
-
   //* 비밀번호 숨김
   const toggleHidePassword = () => {
     setHidePassword(!hidePassword);
