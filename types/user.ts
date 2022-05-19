@@ -4,6 +4,5 @@ export type StoredUserType = {
   password: string;
   firstname: string;
   lastname: string;
-  birthday: string;
-  profileImage: string;
+  // birthday: string;
 };

@@ -1,16 +1,18 @@
 // eslint-disable
 // eslint-disable-next-line
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import { NextApiRequest, NextApiResponse } from 'next';
 import Data from '../../../lib/data';
 import { StoredUserType } from '../../../types/user';
-
 // eslint-disable-next-line consistent-return
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const { email, firstname, lastname, password, birthday } = req.body;
-    if (!email || firstname || lastname || password || birthday) {
-      return res.status(400).send('필수데이터가 없습니다.');
+    // eslint-disable-next-line object-curly-newline
+    const { email, firstname, lastname, password } = req.body;
+    if (!email || !firstname || !lastname || !password) {
+      res.statusCode = 400;
+      return res.send('필수 데이터가 없습니다.');
     }
     const userExist = Data.user.exist({ email });
     if (userExist) {
@@ -31,10 +33,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       firstname,
       lastname,
       password: hashedPassword,
-      birthday,
-      profileImage: '/static/image/user/default_user_profile_image.jpg',
+      // birthday,
     };
     Data.user.write([...users, newUser]);
+
+    const token = jwt.sign(String(newUser.id), process.env.JWT_SECRET!);
+    res.setHeader(
+      'Set-Cookie',
+      `access_token=${token}; path=/; expires=${new Date(
+        Date.now() + 60 * 60 * 24 * 1000 * 3, // 3일
+      )}; httponly`,
+    );
   }
 };
 // const getList = () => {

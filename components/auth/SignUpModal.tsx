@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { dayList, monthList, yearList } from '../../lib/staticData';
+import { signupAPI } from '../../lib/api/auth';
 import ClosedEyeIcon from '../../public/static/svg/auth/closed_eye.svg';
 import MailIcon from '../../public/static/svg/auth/mail.svg';
 import OpenedEyeIcon from '../../public/static/svg/auth/opened_eye.svg';
@@ -10,7 +10,6 @@ import CloseXIcon from '../../public/static/svg/modal/modal_colose_x_icon.svg';
 import palette from '../../styles/palette';
 import Button from '../common/Button';
 import Input from '../common/Input';
-import Selector from '../common/Selector';
 
 const Container = styled.form`
   width: 568px;
@@ -76,19 +75,19 @@ const SignUpModal: React.FC = () => {
   const [firstname, setFirstname] = useState('');
   const [password, setPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
-  //
-  const [birthYear, setBirthYear] = useState<string | undefined>();
-  const [birthDay, setBirthDay] = useState<string | undefined>();
-  const [birthMonth, setBirthMonth] = useState<string | undefined>();
+  // //
+  // const [birthYear, setBirthYear] = useState<string | undefined>();
+  // const [birthDay, setBirthDay] = useState<string | undefined>();
+  // const [birthMonth, setBirthMonth] = useState<string | undefined>();
 
   //* 비밀번호 숨김
   const toggleHidePassword = () => {
     setHidePassword(!hidePassword);
   };
 
-  const disabledMoths = ['월'];
-  const disabledDays = ['일'];
-  const disabledYears = ['년'];
+  // const disabledMoths = ['월'];
+  // const disabledDays = ['일'];
+  // const disabledYears = ['년'];
 
   //* 이메일 주소 변경시
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -114,21 +113,41 @@ const SignUpModal: React.FC = () => {
    * @param blank
    */
 
-  //* 생년월일 월 변경 시
-  const onChangeBirthMonth = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setBirthMonth(e.target.value);
-  };
-  //* 생년월일 일 변경 시
-  const onChangeBirthDay = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setBirthDay(e.target.value);
-  };
-  //* 생년월일 년 변경 시
-  const onChangeBirthYear = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setBirthYear(e.target.value);
+  // //* 생년월일 월 변경 시
+  // const onChangeBirthMonth = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   setBirthMonth(e.target.value);
+  // };
+  // //* 생년월일 일 변경 시
+  // const onChangeBirthDay = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   setBirthDay(e.target.value);
+  // };
+  // //* 생년월일 년 변경 시
+  // const onChangeBirthYear = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   setBirthYear(e.target.value);
+  // };
+
+  const onSubmitSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      const signUpBody = {
+        email,
+        lastname,
+        firstname,
+        password,
+        // birthday: new Date(
+        //   `${birthYear}-${birthMonth!.replace('월', '')}-${birthDay}`,
+        // ).toISOString(),
+      };
+
+      await signupAPI(signUpBody);
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log(e);
+    }
   };
 
   return (
-    <Container>
+    <Container onSubmit={onSubmitSignUp}>
       <CloseXIcon className="modal-close-x-icon" />
 
       <div className="input-wrapper">
@@ -177,7 +196,7 @@ const SignUpModal: React.FC = () => {
         만 18세 이상의 성인만 회원으로 가입할 수 있습니다. 생일은 다른
         에어비앤비 이용자에게 공개되지 않습니다.
       </p>
-      <div className="sign-up-modal-birthday-seletors">
+      {/* <div className="sign-up-modal-birthday-seletors">
         <div className="sign-up-modal-birthday-month-selector">
           <Selector
             options={monthList}
@@ -205,7 +224,7 @@ const SignUpModal: React.FC = () => {
             onChange={onChangeBirthYear}
           />
         </div>
-      </div>
+      </div> */}
       <div className="sign-up-modal-submit-button-wrapper">
         <Button type="submit">가입하기</Button>
       </div>

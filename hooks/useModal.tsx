@@ -1,7 +1,6 @@
-/* eslint-disable no-use-before-define */
-import React, { useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
-import styled from 'styled-components';
+import React, { useRef, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
@@ -43,7 +42,7 @@ const useModal = () => {
     useEffect(() => {
       setMounted(true);
       if (document) {
-        const dom = document.querySelector('#root-modal');
+        const dom = document.querySelector("#root-modal");
         ref.current = dom;
       }
     }, []);
@@ -58,7 +57,7 @@ const useModal = () => {
           />
           {children}
         </Container>,
-        ref.current,
+        ref.current
       );
     }
     return null;
